@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="icon_planet.jpg">
+    <title>Get Started</title>
+    <style>
+        body {
+            font-family: 'Roboto Flex', sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .bio-section {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .bio-section h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .bio-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .image-section {
+            flex: 1;
+        }
+
+        .image-section img {
+            width: 380px;
+            height: 380px;
+            object-fit: cover;
+            border-radius: 20px 100px;
+        }
+
+        .custom-button {
+            background-color: #8F66E4;
+            color: #1a1a2e;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 10px;
+            width: 150px;
+            border: 2px solid #8F66E4;
+            position: relative;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .custom-button::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border: 2px solid #8F66E4;
+            z-index: -1;
+        }
+
+        .custom-button:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="bio-section">
+            <h1>Get Started</h1>
+            <p>To start using the <b>Student Location Tracking System</b>, students need to register and grant location
+                access. Admins can then monitor student locations in real-time.
+            </p>
+            <br>
+            <br>
+            <br>
+
+            <button class="custom-button" onclick="window.location.href='reg.html'">REGISTER HERE</button>
+
+        </div>
+        <div class="image-section">
+            <img src="purple.svg">
+        </div>
+    </div>
+</body>
+
+</html>

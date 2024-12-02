@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Log</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+                url('color-css/ccchaos.svg');
+            background-color: #CEE470;
+            background-size: cover;
+            color: #333;
+        }
+
+        h1 {
+            text-align: left;
+            color: #4C3491;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .log-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .log-header,
+        .log-row {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .log-header {
+            background-color: #f3f4f6;
+            font-weight: bold;
+            color: #555;
+            text-transform: uppercase;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .log-header div {
+            flex: 1;
+            text-align: center;
+        }
+
+        .log-row {
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .log-row div {
+            flex: 1;
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+
+        .actor-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .actor-icon i {
+            color: #4C3491;
+            font-size: 16px;
+        }
+
+        .status-dropdown {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+
+        .save-button {
+            margin-left: 15px;
+            background-color: #6D4AD0;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            height: 36px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .save-button:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 480px) {
+
+            .log-header,
+            .log-row {
+                flex-direction: column;
+                text-align: center;
+                padding: 10px;
+            }
+
+            .log-header div,
+            .log-row div {
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+
+            .log-header,
+            .log-row {
+                padding: 10px 15px;
+            }
+
+            .log-header div,
+            .log-row div {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="log-container">
+        <div class="log-header">
+            <div>Assigned Personnel</div>
+            <div>Student</div>
+            <div>Program</div>
+            <div>Emergency Type</div>
+            <div>Date and Time</div>
+            <div>Status</div>
+            <div>Actions</div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const emergencyNo = urlParams.get("emergencyNo");
+        const mobileNo = urlParams.get("mobileNo");
+        const fullName = urlParams.get("fullName");
+        const year = urlParams.get("year");
+        const section = urlParams.get("section");
+        const program = urlParams.get("program");
+        const emergencyName = urlParams.get("emergencyName");
+        const emergencyType = urlParams.get("emergencyType");
+        const userName = urlParams.get('userName');
+
+        const emergencyLogs = [
+            {
+                actor: userName || "Unknown User",
+                actorIcon: "<i class='fa fa-user'></i>",
+                student: fullName || "Unknown Student",
+                program: program || "Unknown Program",
+                emergencyType: emergencyType || "Unknown Emergency",
+                date: new Date().toLocaleDateString(),
+                time: new Date().toLocaleTimeString(),
+                status: "Pending",
+            },
+        ];
+
+        const logContainer = document.querySelector(".log-container");
+
+        emergencyLogs.forEach((log) => {
+            const logRow = document.createElement("div");
+            logRow.className = "log-row";
+            logRow.innerHTML = `
+    <div class="actor-icon">${log.actorIcon} ${log.actor}</div>
+    <div>${log.student}</div>
+    <div>${log.program}</div>
+    <div>${log.emergencyType}</div>
+    <div>
+      ${log.date}<br>
+      ${log.time}
+    </div>
+    <div>
+      <select class="status-dropdown">
+        <option value="Pending" ${log.status === "Pending" ? "selected" : ""}>Pending</option>
+        <option value="Resolved" ${log.status === "Resolved" ? "selected" : ""}>Resolved</option>
+        <option value="Escalated" ${log.status === "Escalated" ? "selected" : ""}>Escalated</option>
+      </select>
+    </div>
+    <div>
+      <button class="save-button">Save Changes</button>
+    </div>
+  `;
+            logContainer.appendChild(logRow);
+
+            const saveButton = logRow.querySelector(".save-button");
+            const statusDropdown = logRow.querySelector(".status-dropdown");
+
+            saveButton.addEventListener("click", function () {
+                const actor = log.actor;
+                const actorIcon = log.actorIcon;
+                const studentName = log.student;
+                const program = log.program;
+                const emergencyType = log.emergencyType;
+                const status = statusDropdown.value;
+
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", `save_log.php?actor=${actor}&actor_icon=${actorIcon}&student_name=${studentName}&program=${program}&emergency_type=${emergencyType}&status=${status}`, true);
+
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        if (xhr.responseText === "success") {
+                            alert("Log saved successfully!");
+                            window.location.href = "home.html";
+                        } else {
+                            alert("Error saving log: " + xhr.responseText);
+                        }
+                    } else {
+                        alert("Error saving log: " + xhr.statusText);
+                    }
+                };
+                xhr.send();
+            });
+        });
+    </script>
+</body>
+
+</html>

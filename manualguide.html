@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emergency Button Guide</title>
+  <link rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    @import url("https://use.fontawesome.com/releases/v5.15.3/css/all.css");
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+    .cd__main {
+      display: block !important;
+      background: linear-gradient(to right, #d9a7c7, #fffcdc) !important;
+    }
+
+    body {
+      --color-bg: #f0f0f0;
+      --color-text: #303030;
+      background-image: url('background.svg');
+      background-size: cover;
+      color: var(--color-text);
+      text-align: center;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .ol-cards,
+    .ol-cards *,
+    .ol-cards *::before,
+    .ol-cards *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .ol-cards {
+      --ol-cards-color-bg: var(--color-bg);
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      max-width: 45em;
+      padding: 2em;
+      gap: 2em;
+      counter-reset: ol-cards-counter;
+    }
+
+    .ol-cards li {
+      display: grid;
+      grid-template-areas:
+        "step title"
+        "step content";
+      padding: 1em 2em 1em 0;
+      row-gap: 0.5em;
+      column-gap: 2em;
+      counter-increment: ol-cards-counter;
+      text-align: left;
+      background-color: var(--ol-cards-color-bg);
+    }
+
+    .ol-cards.alternate li:nth-child(even) {
+      grid-template-areas:
+        "title step"
+        "content step";
+      padding: 1em 0 1em 2em;
+    }
+
+    .ol-cards li .step {
+      grid-area: step;
+      display: flex;
+      align-self: flex-start;
+      background-color: var(--ol-cards-color-accent);
+      border-radius: 0 50em 50em 0;
+      padding: 1em;
+      justify-content: flex-end;
+      flex: 1;
+      gap: 1em;
+    }
+
+    .ol-cards li .step::before {
+      content: "0" counter(ol-cards-counter);
+      flex: 1;
+      align-self: center;
+      color: var(--ol-cards-color-bg);
+      font-weight: bold;
+      font-size: 2em;
+    }
+
+    .ol-cards.alternate li:nth-child(even) .step {
+      border-radius: 50em 0 0 50em;
+      flex-direction: row-reverse;
+    }
+
+    .ol-cards li .step i {
+      color: var(--ol-cards-color-accent);
+      width: 2em;
+      height: 2em;
+      font-size: 1.8em;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background-color: var(--ol-cards-color-bg);
+
+    }
+
+    .ol-cards li .title {
+      grid-area: title;
+      color: var(--ol-cards-color-accent);
+      font-weight: bold;
+    }
+
+    .ol-cards li .content {
+      grid-area: content;
+      font-size: 0.9em;
+    }
+
+    @media only screen and (max-width: 500px) {
+      .ol-cards {
+        padding: 1em;
+      }
+
+      .ol-cards li {
+        column-gap: 0em;
+        grid-template-areas:
+          'step title'
+          'content content';
+        grid-template-columns: min-content auto;
+        padding: 1em 0em;
+      }
+
+      .ol-cards.alternate li:nth-child(even) {
+        column-gap: 0em;
+        grid-template-areas:
+          'title step'
+          'content content';
+        grid-template-columns: auto min-content;
+        padding: 1em 0em;
+      }
+
+      .ol-cards li .title {
+        padding: 0 1em;
+        align-self: center;
+        width: auto;
+
+      }
+
+      .ol-cards li .step {
+        font-size: .5em;
+      }
+
+      .ol-cards li .content {
+        padding: 0 1em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <ol class="ol-cards alternate">
+    <li style="--ol-cards-color-accent:#f68121">
+      <div class="step"><i class="fas fa-heartbeat"></i></div>
+      <div class="title">Medical Emergency</div>
+      <div class="content">Use this button for medical emergencies requiring urgent attention, such as serious injuries,
+        heart attacks, severe bleeding, strokes, severe allergic reactions, respiratory failure, or unconsciousness.
+      </div>
+    </li>
+    <li style="--ol-cards-color-accent:#ed1c24">
+      <div class="step"><i class="fas fa-hand-rock"></i></div>
+      <div class="title">Violence Emergency</div>
+      <div class="content"> Use this button in situations involving physical violence or assault, including incidents
+        like physical assault, bullying, fights or brawls, threats of violence, domestic violence, or robbery and
+        mugging.</div>
+    </li>
+    <li style="--ol-cards-color-accent:#582c8b">
+      <div class="step"><i class="fas fa-fire"></i></div>
+      <div class="title">Fire Emergency</div>
+      <div class="content">Use this button in the event of a fire or smoke, such as building fires, forest fires,
+        electrical fires, gas explosions, or burn injuries, especially if fire alarms go off.</div>
+    </li>
+    <li style="--ol-cards-color-accent:#0166b4">
+      <div class="step"><i class="fas fa-shield-alt"></i></div>
+      <div class="title">Security Threat</div>
+      <div class="content">Use this button in the case of security threats or dangers, including active shooter
+        situations, hostage situations, bomb threats, armed robberies, or suspicious activities.</div>
+    </li>
+    <li style="--ol-cards-color-accent:#00a560">
+      <div class="step"><i class="fas fa-bolt"></i></div>
+      <div class="title">Power Outage</div>
+      <div class="content">Use this button when there is a sudden power failure caused by grid failure, storm-related
+        outages, electrical faults, power surge damage, or generator failure, especially when electricity cannot be
+        quickly restored.</div>
+    </li>
+    <li style="--ol-cards-color-accent:#f4a261">
+      <div class="step"><i class="fas fa-map-marker"></i></div>
+      <div class="title">Stranded</div>
+      <div class="content">Use this button when you are stranded or stuck and need assistance, or being stuck in an
+        elevator.</div>
+    </li>
+
+  </ol>
+</body>
+
+</html>
